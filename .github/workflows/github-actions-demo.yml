@@ -1,0 +1,55 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_x32:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Build x32
+        run: |
+          g++ -m32 -o output_x32 main.cpp
+        
+      - name: Test x32
+        run: |
+          ./output_x32 --test
+        
+      - name: Generate Artifact x32
+        run: |
+          mkdir artifacts
+          cp output_x32 artifacts/
+          
+        artifacts:
+          name: Artifact_x32
+          path: artifacts/
+
+  build_x64:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Build x64
+        run: |
+          g++ -m64 -o output_x64 main.cpp
+        
+      - name: Test x64
+        run: |
+          ./output_x64 --test
+        
+      - name: Generate Artifact x64
+        run: |
+          mkdir artifacts
+          cp output_x64 artifacts/
+          
+        artifacts:
+          name: Artifact_x64
+          path: artifacts/

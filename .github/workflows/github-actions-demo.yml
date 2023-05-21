@@ -26,7 +26,9 @@ jobs:
           mkdir artifacts
           cp output_x32 artifacts/
           
-        artifacts:
+      - name: Upload Artifact x32
+        uses: actions/upload-artifact@v2
+        with:
           name: Artifact_x32
           path: artifacts/
 
@@ -50,6 +52,8 @@ jobs:
           mkdir artifacts
           cp output_x64 artifacts/
           
-        artifacts:
+      - name: Upload Artifact x64
+        uses: actions/upload-artifact@v2
+        with:
           name: Artifact_x64
           path: artifacts/
